@@ -30,25 +30,25 @@
 from typing import List
 
 
-class LogicalState(list):
-    def __init__(self, state: list[int] or str = None):
+class LogicalState(List):
+    def __init__(self, state: List[int] or str = None):
         """Represent a Logical state
 
-        :param state: Can be either None, a list or a str, defaults to None
+        :param state: Can be either None, a List or a str, defaults to None
         :raises ValueError: Must have only 0 and 1 in a state
-        :raises TypeError: Supports only None, list or str as state type
+        :raises TypeError: Supports only None, List or str as state type
         """
         if state is None:
             super().__init__([])
             return
         if isinstance(state, str):
             state = [int(elem) for elem in state]
-        if isinstance(state, list):
+        if isinstance(state, List):
             if state.count(0) + state.count(1) != len(state):
                 raise ValueError("A logical state should only contain 0s and 1s")
             super().__init__(state)
             return
-        raise TypeError(f"LogicalState can be initialise with None, list or str, here {type(state)}")
+        raise TypeError(f"LogicalState can be initialise with None, List or str, here {type(state)}")
 
     def __add__(self, other):
         temp = self.copy()
@@ -63,8 +63,8 @@ class LogicalState(list):
 
 def generate_all_logical_states(n : int) -> List[LogicalState]:
     format_str = f"#0{n+2}b"
-    logical_state_list = []
+    logical_state_List = []
     for i in range(2**n):
         states = format(i, format_str)[2:]
-        logical_state_list.append(LogicalState([int(state) for state in states]))
-    return logical_state_list
+        logical_state_List.append(LogicalState([int(state) for state in states]))
+    return logical_state_List
